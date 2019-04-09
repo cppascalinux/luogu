@@ -17,6 +17,7 @@ void add(int c)
 	lnk[0]=-1;
 	int cur=++cnt,p;
 	len[cur]=len[lst]+1;
+	sz[cur]=1;
 	for(p=lst;p!=-1&&!o[p][c];p=lnk[p])
 		o[p][c]=cur;
 	if(p!=-1)
@@ -45,8 +46,8 @@ void ins(int a,int b)
 }
 void dfs(int x)
 {
-	if(!deg[x])
-		sz[x]=1;
+	// if(!deg[x])
+	// 	sz[x]=1;
 	// printf("x:%d len:%d sz:%d\n",x,len[x],sz[x]);
 	for(int i=hd[x];i;i=nxt[i])
 	{
@@ -72,11 +73,11 @@ int main()
 	for(int i=1;i<=cnt;i++)
 	{
 		ins(lnk[i],i);
-		deg[lnk[i]]++;
+		// deg[lnk[i]]++;
 	}
-	// for(int i=0;i<=cnt;i++)
-	// 	printf("i:%d lnk:%d len:%d\n",i,lnk[i],len[i]);
 	dfs(0);
+	// for(int i=0;i<=cnt;i++)
+	// 	printf("i:%d lnk:%d len:%d sz:%d\n",i,lnk[i],len[i],sz[i]);
 	ans+=(ll)n*(n+1)*(n-1)/2;
 	printf("%lld",ans);
 	return 0;
