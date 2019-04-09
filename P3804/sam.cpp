@@ -50,6 +50,8 @@ void solve()
 	{
 		int x=q.front();
 		q.pop();
+		if(x==-1)
+			break;
 		cnt[lnk[x]]+=cnt[x];
 		if(!--deg[lnk[x]])
 			q.push(lnk[x]);
