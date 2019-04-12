@@ -1,0 +1,4 @@
+*.in
+*.out
+!lct.in
+!lct.out
