@@ -1,0 +1,4 @@
+*.in
+*.out
+!sam.in
+!sam.out
