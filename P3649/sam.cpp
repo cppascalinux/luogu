@@ -11,7 +11,6 @@ ll ans;
 char s[300009],ps[600009];
 int o[600009][27],lnk[600009],len[600009],sz[600009],pos[300009];
 int hd[600009],eg[600009],nxt[600009];
-int f[600009][20];
 int ext[600009];
 void add(int sp,int c)
 {
@@ -49,9 +48,9 @@ void ins(int a,int b)
 }
 void dfs(int x)
 {
-	f[x][0]=lnk[x];
+	o[x][0]=lnk[x];
 	for(int i=1;i<=20;i++)
-		f[x][i]=f[f[x][i-1]][i-1];
+		o[x][i]=o[o[x][i-1]][i-1];
 	for(int i=hd[x];i;i=nxt[i])
 	{
 		dfs(eg[i]);
@@ -64,8 +63,8 @@ void solve(int rp,int l)
 		return;
 	int p=pos[rp];
 	for(int i=20;i>=0;i--)
-		if(len[f[p][i]]>=l)
-			p=f[p][i];
+		if(len[o[p][i]]>=l)
+			p=o[p][i];
 	ans=max(ans,(ll)sz[p]*l);
 }
 void manacher()
@@ -82,7 +81,7 @@ void manacher()
 	{
 		int &p=ext[i];
 		if(i<mx)
-			p=min(ext[2*id-i],mx-p);
+			p=min(ext[2*id-i],mx-i);
 		while(ps[i+p]==ps[i-p])
 		{
 			p++;
@@ -115,6 +114,7 @@ int main()
 		add(i,s[i]-'a'+1);
 	for(int i=2;i<=cnt;i++)
 		ins(lnk[i],i);
+	memset(o,0,sizeof(o));
 	dfs(1);
 	manacher();
 	// for(int i=2;i<=2*n;i++)
