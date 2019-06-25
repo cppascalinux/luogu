@@ -48,15 +48,16 @@ int mrg(int x,int y)
 {
 	if(!x||!y)
 		return x+y;
-	down(x),down(y);
 	if(rand()%(sz[x]+sz[y])<sz[x])
 	{
+		down(x);
 		ch[x][1]=mrg(ch[x][1],y);
 		update(x);
 		return x;
 	}
 	else
 	{
+		down(y);
 		ch[y][0]=mrg(x,ch[y][0]);
 		update(y);
 		return y;
